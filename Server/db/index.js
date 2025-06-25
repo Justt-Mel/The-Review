@@ -24,6 +24,14 @@ const seed = async () =>{
     tech_id UUID REFERENCES tech(id) NOT NULL,
     created_at TIMESTAMP DEFUALT now() NOT NULL,
     updated_at TIMESTAP DEFUALT now(),
+    CONSTRAINT user_and_tech_id UNIQUE(user_id,tech_id)
     );
     `
+    await client.query(SQL)
+
+}
+
+module.exports ={
+    client,
+    seed
 }
