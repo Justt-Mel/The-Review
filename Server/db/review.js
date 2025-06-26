@@ -13,20 +13,30 @@ const createReview = async (review) => {
 }
 
 const fetchReviews = async (techid) => {
-    const SQL = `
-    SELECT * 
-    FROM review
-    WHERE tech_id = $1
-    `
-    const response = await client.query(SQL, [techid])
-    return response.rows
-    
+    let SQL, params;
+    if (techid) {
+        SQL = `
+        SELECT * 
+        FROM review
+        WHERE tech_id = $1
+        `;
+        params = [techid];
+    } else {
+        SQL = `
+        SELECT * 
+        FROM review
+        `;
+        params = [];
+    }
+    const response = await client.query(SQL, params);
+    return response.rows;
 }
 
 const deleteReview = async (review) => {
     const SQL = `
     DELETE from review
     WHERE id = $1 and user_id = $2 
+    RETURNING *
     `
     await client.query(SQL, [review.id, review.user_id])
 }
