@@ -5,6 +5,7 @@ const {
 
 const express = require('express');
 const app = express();
+app.use('/api', require('./api'))
 
 const init = async () => {
     const PORT = process.env.PORT || 3000;

@@ -12,27 +12,27 @@ const createReview = async (review) => {
     return response.rows[0]
 }
 
-const fecthReviews =async (techid) => {
+const fetchReviews = async (techid) => {
     const SQL = `
     SELECT * 
     FROM review
     WHERE tech_id = $1
     `
-    const response = await client.query(SQL,[techid])
+    const response = await client.query(SQL, [techid])
     return response.rows
     
 }
 
-const deleteReviews = async (review) => {
+const deleteReview = async (review) => {
     const SQL = `
     DELETE from review
-    WHERE id $1 and user_id = $2 
+    WHERE id = $1 and user_id = $2 
     `
     await client.query(SQL, [review.id, review.user_id])
 }
 
 module.exports = {
     createReview,
-    fecthReviews,
-    deleteReviews
+    fetchReviews,
+    deleteReview
 }
