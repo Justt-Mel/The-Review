@@ -12,6 +12,16 @@ const createTech = async (tech) => {
     return response.rows[0]
 }
 
+const getTechById = async (id) => {
+    const SQL =`
+    SELECT * 
+    FROM tech
+    WHERE id = $1
+    `
+    const response = await client.query(SQL,[id])
+    return response.rows[0]
+}
+
 const fetchTech = async ()=> {
     const SQL =`
     SELECT *
@@ -23,5 +33,6 @@ const fetchTech = async ()=> {
 
 module.exports = {
     createTech,
-    fetchTech
+    fetchTech,
+    getTechById
 }

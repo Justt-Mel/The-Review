@@ -12,24 +12,14 @@ const createReview = async (review) => {
     return response.rows[0]
 }
 
-const fetchReviews = async (techid) => {
-    let SQL, params;
-    if (techid) {
-        SQL = `
-        SELECT * 
-        FROM review
-        WHERE tech_id = $1
-        `;
-        params = [techid];
-    } else {
-        SQL = `
-        SELECT * 
-        FROM review
-        `;
-        params = [];
-    }
-    const response = await client.query(SQL, params);
-    return response.rows;
+const fetchReviews = async () => {
+    const SQL = `
+    SELECT * 
+    FROM review
+    `
+
+    const response = await client.query(SQL)
+    return response.rows
 }
 
 const deleteReview = async (review) => {
