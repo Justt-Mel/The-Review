@@ -15,7 +15,7 @@ const createReview = async (review) => {
 const fecthReviews =async (techid) => {
     const SQL = `
     SELECT * 
-    FROM reviews
+    FROM review
     WHERE tech_id = $1
     `
     const response = await client.query(SQL,[techid])
@@ -25,7 +25,7 @@ const fecthReviews =async (techid) => {
 
 const deleteReviews = async (review) => {
     const SQL = `
-    DELETE from reviews  
+    DELETE from review
     WHERE id $1 and user_id = $2 
     `
     await client.query(SQL, [review.id, review.user_id])
